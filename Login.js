@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -9,8 +9,37 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
+import axios from 'axios';
 
 const Login = ({navigation}) => {
+  const [Id, setId] = useState('');
+  const [password, setPassword] = useState('');
+
+  const LoginHandler = () => {
+    const user = {
+      email: Id,
+      password: password,
+    };
+    axios
+      .post(
+        'http://ec2-52-78-13-126.ap-northeast-2.compute.amazonaws.com:8080/auth/signin',
+        user,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .then(res => {
+        TOKEN = res.data.token;
+        console.log(TOKEN);
+        navigation.navigate('LocalWelfare');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
@@ -23,17 +52,17 @@ const Login = ({navigation}) => {
             placeholder={'아이디'}
             keyboardType="email-address"
             style={styles.TextInput}
+            onChangeText={text => setId(text)}
           />
           <TextInput
             placeholder={'비밀번호'}
             secureTextEntry
             style={styles.TextInput}
+            onChangeText={text => setPassword(text)}
           />
         </View>
         <View style={styles.button}>
-          <Button
-            onPress={() => navigation.navigate('LocalWelfare')}
-            title="로그인 하기"></Button>
+          <Button onPress={LoginHandler} title="로그인 하기"></Button>
         </View>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Signin')}>
           <Text style={{fontSize: 12, color: '#007AFF'}}>
@@ -50,6 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   login: {
     fontSize: 30,
@@ -70,7 +100,7 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F2F2F2',
+    backgroundColor: 'white',
     marginTop: 20,
     marginBottom: 20,
     borderRadius: 5,
