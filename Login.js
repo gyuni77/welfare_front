@@ -8,6 +8,7 @@ import {
   Button,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -44,7 +45,7 @@ const Login = ({navigation}) => {
     } catch (error) {
       // 에러 처리
       console.error('Login failed:', error);
-      // 사용자에게 알림 등을 통해 로그인 실패 메시지 표시 가능
+      Alert.alert('아이디/비밀번호를 확인해주세요');
     }
   };
 
