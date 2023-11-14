@@ -10,18 +10,20 @@ import {
   Keyboard,
 } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
   const [Id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const LoginHandler = () => {
-    const user = {
-      email: Id,
-      password: password,
-    };
 
-    axios
-      .post(
+  const LoginHandler = async () => {
+    try {
+      const user = {
+        email: Id,
+        password: password,
+      };
+
+      const response = await axios.post(
         'http://ec2-43-201-17-18.ap-northeast-2.compute.amazonaws.com:8080/auth/signin',
         user,
         {
@@ -29,22 +31,21 @@ const Login = ({navigation}) => {
             'Content-Type': 'application/json',
           },
         },
-      )
-      .then(async res => {
-        const TOKEN = res.data.token;
-        console.log(TOKEN);
+      );
 
-        try {
-          await AsyncStorage.setItem('TOKEN', TOKEN);
-        } catch (e) {
-          console.log(e);
-        }
+      const TOKEN = response.data.token;
+      console.log(TOKEN);
 
-        navigation.navigate('LocalWelfare');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      // AsyncStorage에 토큰 저장
+      await AsyncStorage.setItem('TOKEN', TOKEN);
+
+      // 로그인 성공 후 화면 전환
+      navigation.navigate('LocalWelfare');
+    } catch (error) {
+      // 에러 처리
+      console.error('Login failed:', error);
+      // 사용자에게 알림 등을 통해 로그인 실패 메시지 표시 가능
+    }
   };
 
   return (
