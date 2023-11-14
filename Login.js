@@ -14,15 +14,15 @@ import axios from 'axios';
 const Login = ({navigation}) => {
   const [Id, setId] = useState('');
   const [password, setPassword] = useState('');
-
   const LoginHandler = () => {
     const user = {
       email: Id,
       password: password,
     };
+
     axios
       .post(
-        'http://ec2-52-78-13-126.ap-northeast-2.compute.amazonaws.com:8080/auth/signin',
+        'http://ec2-43-201-17-18.ap-northeast-2.compute.amazonaws.com:8080/auth/signin',
         user,
         {
           headers: {
@@ -30,9 +30,16 @@ const Login = ({navigation}) => {
           },
         },
       )
-      .then(res => {
-        TOKEN = res.data.token;
+      .then(async res => {
+        const TOKEN = res.data.token;
         console.log(TOKEN);
+
+        try {
+          await AsyncStorage.setItem('TOKEN', TOKEN);
+        } catch (e) {
+          console.log(e);
+        }
+
         navigation.navigate('LocalWelfare');
       })
       .catch(err => {
