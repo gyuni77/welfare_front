@@ -15,6 +15,7 @@ import {
   Pressable,
   TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LocalWelfare = ({navigation}) => {
   const [search, setSearch] = useState('');
@@ -258,6 +259,26 @@ const LocalWelfare = ({navigation}) => {
     );
   };
 
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('TOKEN');
+      if (value !== null) {
+        console.log(`"TOKEN" = ${value}`);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const removeToken = async () => {
+    try {
+      await AsyncStorage.removeItem('TOKEN');
+    } catch (e) {
+      console.log(e);
+    }
+    console.log('로그아웃 되었습니다');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -291,9 +312,7 @@ const LocalWelfare = ({navigation}) => {
                   style={styles.modalText}>
                   로그인 하기
                 </Text>
-                <Text
-                  onPress={() => navigation.navigate('Login')}
-                  style={styles.modalText}>
+                <Text onPress={removeToken} style={styles.modalText}>
                   로그아웃
                 </Text>
                 <Pressable
@@ -327,6 +346,7 @@ const LocalWelfare = ({navigation}) => {
           onChangeText={text => setSearch(text)}
         />
       </View>
+      <Button onPress={getData} title="?"></Button>
       <FlatList
         data={data}
         renderItem={renderItem}
