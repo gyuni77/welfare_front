@@ -9,9 +9,11 @@ import {
   Button,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const 시도명 = [
   {label: '서울특별시', value: '서울특별시'},
@@ -315,15 +317,6 @@ const cityRegionMapping = {
   ],
 };
 
-const family = [
-  {label: '저소득', value: 'LOW_INCOME'},
-  {label: '장애인', value: 'DISABLED'},
-  {label: '한부모,조손', value: 'SINGLE_PARENT'},
-  {label: '다자녀', value: 'MULTI_CHILDREN'},
-  {label: '다문화,탈북민', value: 'MULTI_CULTURE'},
-  {label: '보훈대상자', value: 'VETARAN'},
-];
-
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     marginTop: 10,
@@ -350,33 +343,8 @@ const pickerSelectStyles = StyleSheet.create({
   },
 });
 
-const pickerSelectStyle = StyleSheet.create({
-  inputIOS: {
-    marginTop: 10,
-    fontSize: 16,
-    height: 50,
-    width: 300,
-    borderColor: 'gray',
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderRadius: 12,
-    padding: 10,
-  },
-  inputAndroid: {
-    marginTop: 10,
-    fontSize: 16,
-    height: 50,
-    width: 300,
-    borderColor: 'gray',
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderRadius: 12,
-    padding: 10,
-  },
-});
-
 const Profile = ({navigation}) => {
-  const [newCity, setNewCity] = useState('서울특별시');
+  const [NewCity, setNewCity] = useState('서울특별시');
   const [NewPassword, setNewPassword] = useState('');
   const [NewUsername, setNewUserName] = useState('');
   const [NewRegion, setNewRegion] = useState('');
@@ -386,30 +354,111 @@ const Profile = ({navigation}) => {
     setNewRegion(''); // 선택된 지방 초기화
   };
 
-  const SignHandler = () => {
-    const userData = {
-      ctpvNm: newCity,
-      username: NewUsername,
-      password: NewPassword,
-      sggNm: NewRegion,
-    };
-    axios
-      .post(
-        'http://ec2-52-78-13-126.ap-northeast-2.compute.amazonaws.com:8080/auth/signup',
-        userData,
+  const getToken = async () => {
+    try {
+      return await AsyncStorage.getItem('TOKEN');
+    } catch (e) {
+      console.log(e);
+      console.log('Error getting token.');
+      return null;
+    }
+  };
+
+  const PasswordChange = async () => {
+    try {
+      const token = await getToken();
+
+      if (!token) {
+        console.log('Token is null or undefined.');
+        return;
+      }
+
+      const newPassword = {
+        password: NewPassword,
+      };
+
+      const response = await axios.put(
+        'http://ec2-43-201-17-18.ap-northeast-2.compute.amazonaws.com:8080/auth/updatePassword',
+        newPassword,
         {
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `${token}`,
           },
         },
-      )
-      .then(res => {
-        console.log(res);
-        navigation.navigate('Login');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      );
+
+      console.log(response);
+      Alert.alert('변경 완료 되었습니다!');
+    } catch (error) {
+      console.log(error);
+      Alert.alert('비밀번호 변경에 실패했습니다.');
+    }
+  };
+
+  const nameChange = async () => {
+    try {
+      const token = await getToken();
+
+      if (!token) {
+        console.log('Token is null or undefined.');
+        return;
+      }
+
+      const newUserName = {
+        username: NewUsername,
+      };
+
+      const response = await axios.put(
+        'http://ec2-43-201-17-18.ap-northeast-2.compute.amazonaws.com:8080/auth/updateUser',
+        newUserName,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${token}`,
+          },
+        },
+      );
+
+      console.log(response);
+      Alert.alert('변경 완료 되었습니다!');
+    } catch (error) {
+      console.log(error);
+      Alert.alert('이름 변경에 실패했습니다.');
+    }
+  };
+
+  const RegionChange = async () => {
+    try {
+      const token = await getToken();
+
+      if (!token) {
+        console.log('Token is null or undefined.');
+        return;
+      }
+
+      const newRegion = {
+        ctpvNm: NewCity,
+        sggNm: NewRegion,
+      };
+
+      const response = await axios.put(
+        'http://ec2-43-201-17-18.ap-northeast-2.compute.amazonaws.com:8080/auth/updateUser',
+        newRegion,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${token}`,
+          },
+        },
+      );
+
+      console.log(response);
+      Alert.alert('변경 완료 되었습니다!');
+    } catch (error) {
+      console.log(error);
+      Alert.alert('지역 변경에 실패했습니다.');
+    }
   };
 
   return (
@@ -426,7 +475,7 @@ const Profile = ({navigation}) => {
             style={styles.IdInput}
             onChangeText={text => setNewPassword(text)}
           />
-          <TouchableOpacity style={styles.doubleCheck}>
+          <TouchableOpacity onPress={PasswordChange} style={styles.doubleCheck}>
             <Text style={{color: 'white'}}>수정</Text>
           </TouchableOpacity>
         </View>
@@ -437,7 +486,7 @@ const Profile = ({navigation}) => {
             style={styles.IdInput}
             onChangeText={text => setNewUserName(text)}
           />
-          <TouchableOpacity style={styles.doubleCheck}>
+          <TouchableOpacity onPress={nameChange} style={styles.doubleCheck}>
             <Text style={{color: 'white'}}>수정</Text>
           </TouchableOpacity>
         </View>
@@ -465,12 +514,12 @@ const Profile = ({navigation}) => {
               placeholder={{
                 label: '시군명',
               }}
-              items={cityRegionMapping[newCity]}
+              items={cityRegionMapping[NewCity]}
             />
           </View>
         </View>
         <TouchableOpacity style={{marginTop: 10, marginBottom: 10}}>
-          <Button title="거주지역 수정" onPress={SignHandler}></Button>
+          <Button title="거주지역 수정" onPress={RegionChange}></Button>
         </TouchableOpacity>
       </SafeAreaView>
     </TouchableWithoutFeedback>
