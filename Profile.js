@@ -11,7 +11,6 @@ import {
   Keyboard,
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import axios from 'axios';
 
 const 시도명 = [
@@ -375,106 +374,28 @@ const pickerSelectStyle = StyleSheet.create({
     padding: 10,
   },
 });
-Date.prototype.format = function (f) {
-  if (!this.valueOf()) return ' ';
 
-  var weekName = [
-    '일요일',
-    '월요일',
-    '화요일',
-    '수요일',
-    '목요일',
-    '금요일',
-    '토요일',
-  ];
-  var d = this;
-
-  return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function ($1) {
-    switch ($1) {
-      case 'yyyy':
-        return d.getFullYear();
-      case 'yy':
-        return (d.getFullYear() % 1000).zf(2);
-      case 'MM':
-        return (d.getMonth() + 1).zf(2);
-      case 'dd':
-        return d.getDate().zf(2);
-      case 'E':
-        return weekName[d.getDay()];
-      case 'HH':
-        return d.getHours().zf(2);
-      case 'hh':
-        return ((h = d.getHours() % 12) ? h : 12).zf(2);
-      case 'mm':
-        return d.getMinutes().zf(2);
-      case 'ss':
-        return d.getSeconds().zf(2);
-      case 'a/p':
-        return d.getHours() < 12 ? '오전' : '오후';
-      default:
-        return $1;
-    }
-  });
-};
-
-String.prototype.string = function (len) {
-  var s = '',
-    i = 0;
-  while (i++ < len) {
-    s += this;
-  }
-  return s;
-};
-String.prototype.zf = function (len) {
-  return '0'.string(len - this.length) + this;
-};
-Number.prototype.zf = function (len) {
-  return this.toString().zf(len);
-};
-
-const Login = ({navigation}) => {
-  const [city, setCity] = useState('서울특별시');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUserName] = useState('');
-  const [region, setRegion] = useState('');
-  const [familySituation, setFamilySituation] = useState('');
-  const [birth, setBirth] = useState('');
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
-  const placeholder = '생년월일을 입력해 주세요';
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = date => {
-    hideDatePicker();
-    setBirth(date.format('yyyy-MM-dd'));
-  };
+const Profile = ({navigation}) => {
+  const [newCity, setNewCity] = useState('서울특별시');
+  const [NewPassword, setNewPassword] = useState('');
+  const [NewUsername, setNewUserName] = useState('');
+  const [NewRegion, setNewRegion] = useState('');
 
   const handleCityChange = value => {
-    setCity(value); // 선택된 도시 업데이트
-    setRegion(''); // 선택된 지방 초기화
+    setNewCity(value); // 선택된 도시 업데이트
+    setNewRegion(''); // 선택된 지방 초기화
   };
 
   const SignHandler = () => {
     const userData = {
-      birth: birth,
-      ctpvNm: city,
-      email: email,
-      username: username,
-      password: password,
-      sggNm: region,
-      familySituation: familySituation,
+      ctpvNm: newCity,
+      username: NewUsername,
+      password: NewPassword,
+      sggNm: NewRegion,
     };
     axios
       .post(
-        'http://ec2-43-201-17-18.ap-northeast-2.compute.amazonaws.com:8080/auth/signup',
+        'http://ec2-52-78-13-126.ap-northeast-2.compute.amazonaws.com:8080/auth/signup',
         userData,
         {
           headers: {
@@ -495,34 +416,30 @@ const Login = ({navigation}) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
         <View>
-          <Text style={styles.login}>회원가입</Text>
+          <Text style={styles.login}>개인정보 수정</Text>
         </View>
         <View style={{flexDirection: 'row'}}>
           <TextInput
             spellCheck
-            placeholder={'이메일'}
-            keyboardType="email-address"
+            placeholder={'비밀번호'}
+            // keyboardType="email-address"
             style={styles.IdInput}
-            onChangeText={text => setEmail(text)}
+            onChangeText={text => setNewPassword(text)}
           />
           <TouchableOpacity style={styles.doubleCheck}>
-            <Button title="중복확인"></Button>
+            <Text style={{color: 'white'}}>수정</Text>
           </TouchableOpacity>
         </View>
-        <View>
+        <View style={{flexDirection: 'row'}}>
           <TextInput
-            placeholder={'비밀번호'}
-            secureTextEntry
-            style={styles.TextInput}
-            onChangeText={text => setPassword(text)}
-          />
-        </View>
-        <View>
-          <TextInput
+            spellCheck
             placeholder={'이름'}
-            style={styles.TextInput}
-            onChangeText={text => setUserName(text)}
+            style={styles.IdInput}
+            onChangeText={text => setNewUserName(text)}
           />
+          <TouchableOpacity style={styles.doubleCheck}>
+            <Text style={{color: 'white'}}>수정</Text>
+          </TouchableOpacity>
         </View>
         <View style={{flexDirection: 'row'}}>
           <View>
@@ -544,53 +461,17 @@ const Login = ({navigation}) => {
               textInputProps={{underlineColorAndroid: 'transparent'}}
               fixAndroidTouchableBug={true} // 안드로이드 오류 해결
               useNativeAndroidPickerStyle={false} // 기본 안드로이드 스타일 제거
-              onValueChange={value => setRegion(value)}
+              onValueChange={value => setNewRegion(value)}
               placeholder={{
                 label: '시군명',
               }}
-              items={cityRegionMapping[city]}
+              items={cityRegionMapping[newCity]}
             />
           </View>
         </View>
-        <View>
-          <RNPickerSelect
-            style={pickerSelectStyle}
-            textInputProps={{underlineColorAndroid: 'transparent'}}
-            fixAndroidTouchableBug={true} // 안드로이드 오류 해결
-            useNativeAndroidPickerStyle={false} // 기본 안드로이드 스타일 제거
-            onValueChange={value => setFamilySituation(value)}
-            placeholder={{
-              label: '가구상황',
-            }}
-            items={family}
-          />
-        </View>
-        <View>
-          <TouchableOpacity onPress={showDatePicker}>
-            <TextInput
-              pointerEvents="none"
-              style={styles.TextInput}
-              placeholder={placeholder}
-              placeholderTextColor="#000000"
-              underlineColorAndroid="transparent"
-              editable={false}
-              value={birth}
-            />
-            <DateTimePickerModal
-              headerTextIOS={placeholder}
-              isVisible={isDatePickerVisible}
-              mode="date"
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
-            />
-          </TouchableOpacity>
-        </View>
         <TouchableOpacity style={{marginTop: 10, marginBottom: 10}}>
-          <Button title="회원가입" onPress={SignHandler}></Button>
+          <Button title="거주지역 수정" onPress={SignHandler}></Button>
         </TouchableOpacity>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Login')}>
-          <Text style={{color: '#2196F3'}}>이미 계정이 있으신가요?</Text>
-        </TouchableWithoutFeedback>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
@@ -613,7 +494,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     backgroundColor: 'white',
     borderRadius: 10,
-    marginTop: 20,
+    marginTop: 10,
     fontSize: 15,
     paddingHorizontal: 20,
   },
@@ -633,8 +514,8 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
-    marginTop: 20,
+    backgroundColor: '#2196F3',
+    marginTop: 10,
     marginLeft: 5,
     borderRadius: 5,
   },
@@ -664,4 +545,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default Profile;
