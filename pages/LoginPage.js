@@ -13,7 +13,7 @@ import {
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const LoginPage = ({navigation}) => {
+const Login = ({navigation}) => {
   const [Id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -25,7 +25,7 @@ const LoginPage = ({navigation}) => {
       };
 
       const response = await axios.post(
-        'http://ec2-43-201-17-18.ap-northeast-2.compute.amazonaws.com:8080/auth/signin',
+        'http://ykh8746.iptime.org:8080/auth/signin',
         user,
         {
           headers: {
@@ -34,18 +34,25 @@ const LoginPage = ({navigation}) => {
         },
       );
 
-      const TOKEN = response.data.token;
-      console.log(TOKEN);
+      const TOKEN = response.data;
+      console.log(response.data);
 
-      // AsyncStorage에 토큰 저장
-      await AsyncStorage.setItem('TOKEN', TOKEN);
-
-      // 로그인 성공 후 화면 전환
-      navigation.navigate('LocalWelfare');
+      if (TOKEN) {
+        await AsyncStorage.setItem('TOKEN', TOKEN);
+        navigation.navigate('LocalWelfare');
+      } else {
+        Alert.alert('로그인 실패', '유효한 토큰이 없습니다.');
+      }
     } catch (error) {
-      // 에러 처리
-      console.error('LoginPage failed:', error);
-      Alert.alert('아이디/비밀번호를 확인해주세요');
+      console.log(error);
+
+      if (error.response) {
+        Alert.alert('로그인 실패', '아이디 또는 비밀번호를 확인해주세요');
+      } else if (error.request) {
+        Alert.alert('로그인 실패', '네트워크 연결을 확인해주세요');
+      } else {
+        Alert.alert('로그인 실패', '알 수 없는 오류가 발생했습니다');
+      }
     }
   };
 
@@ -116,4 +123,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginPage;
+export default Login;
