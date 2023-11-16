@@ -13,7 +13,7 @@ import {
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Login = ({navigation}) => {
+const LoginPage = ({navigation}) => {
   const [Id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -44,7 +44,7 @@ const Login = ({navigation}) => {
       navigation.navigate('LocalWelfare');
     } catch (error) {
       // 에러 처리
-      console.error('Login failed:', error);
+      console.error('LoginPage failed:', error);
       Alert.alert('아이디/비밀번호를 확인해주세요');
     }
   };
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default LoginPage;

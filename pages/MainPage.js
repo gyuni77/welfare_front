@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const LocalWelfare = ({navigation}) => {
+const MainPage = ({navigation}) => {
   const [search, setSearch] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [test, setTest] = useState('');
@@ -50,7 +50,7 @@ const LocalWelfare = ({navigation}) => {
       }
     };
     getdata();
-  }, []);
+  }, [test]);
 
   const renderItem = ({item}) => {
     return (
@@ -259,4 +259,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LocalWelfare;
+export default MainPage;

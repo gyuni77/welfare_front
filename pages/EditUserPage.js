@@ -343,7 +343,7 @@ const pickerSelectStyles = StyleSheet.create({
   },
 });
 
-const Profile = ({navigation}) => {
+const EditUserPage = ({navigation}) => {
   const [NewCity, setNewCity] = useState('서울특별시');
   const [NewPassword, setNewPassword] = useState('');
   const [NewUsername, setNewUserName] = useState('');
@@ -594,4 +594,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default EditUserPage;
