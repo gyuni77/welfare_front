@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {styles} from '../styles/SignupStyle';
 import {SignupInput} from '../components/SignupComponents/SignupInput';
@@ -7,11 +7,26 @@ import {UserInfoSubmit} from '../components/SignupComponents/UserInfoSubmit';
 import {AlreadyUser} from '../components/SignupComponents/AlreadyUser';
 
 const Signup = () => {
+  const [birth, setBirth] = useState('');
+  const [city, setCity] = useState({label: '', value: ''});
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUserName] = useState('');
+  const [region, setRegion] = useState('');
+  const [familySituation, setFamilySituation] = useState('');
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
-        <SignupInput />
-        <BirthInput />
+        <SignupInput
+          city={city}
+          setEmail={setEmail}
+          setCity={setCity}
+          setPassword={setPassword}
+          setUserName={setUserName}
+          setRegion={setRegion}
+          setFamilySituation={setFamilySituation}
+        />
+        <BirthInput birth={birth} setBirth={setBirth} />
         <UserInfoSubmit />
         <AlreadyUser />
       </SafeAreaView>

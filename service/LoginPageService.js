@@ -1,33 +1,30 @@
-import axios from "axios";
-import { BACKEND_URL } from "../global.js";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Alert } from "react-native";
+import {Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import {BACKEND_URL} from '../global';
 
 class LoginPageService {
   postLogin = async () => {};
 
-  login =  (email, password) => {
-    const user = {
-      email: email,
-      password: password,
-    };
+  login = async (id, password, navigation) => {
+    try {
+      const user = {
+        email: id,
+        password: password,
+      };
 
-    axios.post(`${BACKEND_URL}/auth/signin`, user, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => {
+      const response = await axios.post(`${BACKEND_URL}/auth/signin`, user, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
       const token = response.data;
       console.log(token);
-      AsyncStorage.setItem('TOKEN', token)
-        .then((value)=>{
-          console.log(value);
-          navigation.navigate('Mainpage');
-        })
-        .catch(()=>{
-          Alert.alert('로그인 실패', '유효한 토큰이 없습니다.');
-        });
-    }).catch((error)=>{
+
+      await AsyncStorage.setItem('TOKEN', token);
+      navigation.navigate('MainPage');
+    } catch (error) {
       console.log(error);
 
       if (error.response) {
@@ -37,11 +34,10 @@ class LoginPageService {
       } else {
         Alert.alert('로그인 실패', '알 수 없는 오류가 발생했습니다');
       }
-    });
+    }
   };
 }
 
 const loginPageService = new LoginPageService();
-
 
 export default loginPageService;

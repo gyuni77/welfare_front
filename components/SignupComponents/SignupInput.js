@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import {TouchableOpacity, View, TextInput, Button, Text} from 'react-native';
 import {
   styles,
@@ -8,14 +7,15 @@ import {
 import {Cityname, family, cityRegion} from '../Common/CityRegionFamily';
 import RNPickerSelect from 'react-native-picker-select';
 
-export const SignupInput = () => {
-  const [city, setCity] = useState('서울특별시');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUserName] = useState('');
-  const [region, setRegion] = useState('');
-  const [familySituation, setFamilySituation] = useState('');
-
+export const SignupInput = (
+  city,
+  setCity,
+  setEmail,
+  setUserName,
+  setPassword,
+  setRegion,
+  setFamilySituation,
+) => {
   const handleCityChange = value => {
     setCity(value); // 선택된 도시 업데이트
     setRegion(''); // 선택된 지방 초기화
