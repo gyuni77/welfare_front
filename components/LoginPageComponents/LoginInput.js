@@ -1,19 +1,20 @@
-import React, {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  TextInput,
-  Button,
-  TouchableWithoutFeedback,
-  Keyboard,
   Alert,
+  Button,
+  Keyboard,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {styles} from '../../styles/LoginPageStyle';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {BACKEND_URL} from '../../global';
 
-const Login = ({navigation}) => {
+export const LoginInput = ({navigation}) => {
   const [Id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -24,22 +25,18 @@ const Login = ({navigation}) => {
         password: password,
       };
 
-      const response = await axios.post(
-        'http://ykh8746.iptime.org:8080/auth/signin',
-        user,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      const response = await axios.post(`${BACKEND_URL}/auth/signin`, user, {
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+      });
 
       const TOKEN = response.data;
       console.log(response.data);
 
       if (TOKEN) {
         await AsyncStorage.setItem('TOKEN', TOKEN);
-        navigation.navigate('LocalWelfare');
+        navigation.navigate('Mainpage');
       } else {
         Alert.alert('로그인 실패', '유효한 토큰이 없습니다.');
       }
@@ -78,9 +75,9 @@ const Login = ({navigation}) => {
           />
         </View>
         <View style={styles.button}>
-          <Button onPress={LoginHandler} title="로그인 하기"></Button>
+          <Button onPress={LoginHandler} title="로그인 하기" />
         </View>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Signin')}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('Signup')}>
           <Text style={{fontSize: 12, color: '#007AFF'}}>
             계정이 없으신가요? 여기서 가입하세요!
           </Text>
@@ -89,38 +86,3 @@ const Login = ({navigation}) => {
     </TouchableWithoutFeedback>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-  login: {
-    fontSize: 30,
-  },
-  TextInput: {
-    width: 300,
-    height: 60,
-    borderWidth: 1,
-    borderColor: 'gray',
-    backgroundColor: 'white',
-    borderRadius: 10,
-    marginTop: 20,
-    fontSize: 15,
-    paddingHorizontal: 20,
-  },
-  button: {
-    width: 300,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    marginTop: 20,
-    marginBottom: 20,
-    borderRadius: 5,
-  },
-});
-
-export default Login;
