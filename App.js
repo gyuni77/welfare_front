@@ -11,7 +11,7 @@ import SignupPage from './pages/SignupPage.js';
 const Tab = createBottomTabNavigator();
 
 const App = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [token, setToken] = useState(null);
 
   return (
     <NavigationContainer>
@@ -19,6 +19,8 @@ const App = () => {
         <Tab.Screen
           name="Home"
           component={MainPage}
+          token={token}
+          setToken={setToken}
           options={{
             headerShown: false,
           }}
@@ -26,8 +28,8 @@ const App = () => {
         <Tab.Screen
           name="Recommend"
           component={RecommendPage}
-          isLogin={isLogin}
-          setIsLogin={setIsLogin}
+          token={token}
+          setToken={setToken}
           options={{
             headerShown: false,
           }}
@@ -35,18 +37,18 @@ const App = () => {
         <Tab.Screen
           name="Bookmark"
           component={BookmarkPage}
-          isLogin={isLogin}
-          setIsLogin={setIsLogin}
+          token={token}
+          setToken={setToken}
           options={{
             headerShown: false,
           }}
         />
-        {isLogin ? (
+        {token ? (
           <Tab.Screen
             name="Profile"
             component={EditUserPage}
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
+            token={token}
+            setToken={setToken}
             options={{
               headerShown: false,
             }}
@@ -55,8 +57,8 @@ const App = () => {
           <Tab.Screen
             name="Login"
             component={LoginPage}
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
+            token={token}
+            setToken={setToken}
             options={{
               headerShown: false,
             }}
@@ -65,8 +67,8 @@ const App = () => {
         <Tab.Screen
           name="Signup"
           component={SignupPage}
-          isLogin={isLogin}
-          setIsLogin={setIsLogin}
+          token={token}
+          setToken={setToken}
           options={{
             headerShown: false,
             tabBarButton: () => null,
