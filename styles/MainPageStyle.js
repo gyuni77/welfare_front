@@ -5,6 +5,13 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  modalContanier: {
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   welFare: {
     borderWidth: 1,
     width: 100,
