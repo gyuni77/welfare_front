@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {LoginInput} from '../components/LoginPageComponents/LoginInput';
 
-const Login = () => {
+const Login = ({navigation}) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,6 +11,7 @@ const Login = () => {
       password={password}
       setId={setId}
       setPassword={setPassword}
+      navigation={navigation}
     />
   );
 };
