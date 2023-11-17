@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { useFocusEffect } from "@react-navigation/native";
+import {useFocusEffect} from '@react-navigation/native';
 
 const BookmarkPage = ({navigation, isLogin}) => {
   useFocusEffect(
