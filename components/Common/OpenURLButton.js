@@ -1,5 +1,6 @@
 import {useCallback} from 'react';
 import {Alert, Linking, Text, TouchableOpacity} from 'react-native';
+import {styles} from '../../styles/MainPageStyle';
 
 export const OpenURLButton = ({url, children}) => {
   const handlePress = useCallback(async () => {
