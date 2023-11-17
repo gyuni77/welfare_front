@@ -6,9 +6,9 @@ import {BirthInput} from '../components/SignupComponents/BirthInput';
 import {UserInfoSubmit} from '../components/SignupComponents/UserInfoSubmit';
 import {AlreadyUser} from '../components/SignupComponents/AlreadyUser';
 
-const Signup = () => {
+const SignupPage = () => {
   const [birth, setBirth] = useState('');
-  const [city, setCity] = useState({label: '', value: ''});
+  const [city, setCity] = useState('서울특별시');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUserName] = useState('');
@@ -34,4 +34,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupPage;

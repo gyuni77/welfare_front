@@ -6,6 +6,7 @@ import MainPage from './pages/MainPage.js';
 import EditUserPage from './pages/EditUserPage.js';
 import RecommendPage from './pages/RecommendPage';
 import BookmarkPage from './pages/BookmarkPage';
+import SignupPage from './pages/SignupPage.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -61,6 +62,17 @@ const App = () => {
             }}
           />
         )}
+        <Tab.Screen
+          name="Signup"
+          component={SignupPage}
+          isLogin={isLogin}
+          setIsLogin={setIsLogin}
+          options={{
+            headerShown: false,
+            tabBarButton: () => null,
+            tabBarVisible: false,
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

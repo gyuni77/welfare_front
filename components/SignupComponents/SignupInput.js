@@ -7,7 +7,7 @@ import {
 import {Cityname, family, cityRegion} from '../Common/CityRegionFamily';
 import RNPickerSelect from 'react-native-picker-select';
 
-export const SignupInput = (
+export const SignupInput = ({
   city,
   setCity,
   setEmail,
@@ -15,7 +15,7 @@ export const SignupInput = (
   setPassword,
   setRegion,
   setFamilySituation,
-) => {
+}) => {
   const handleCityChange = value => {
     setCity(value); // 선택된 도시 업데이트
     setRegion(''); // 선택된 지방 초기화
@@ -58,9 +58,6 @@ export const SignupInput = (
             fixAndroidTouchableBug={true} // 안드로이드 오류 해결
             useNativeAndroidPickerStyle={false} // 기본 안드로이드 스타일 제거
             onValueChange={handleCityChange}
-            placeholder={{
-              label: '시도명',
-            }}
             items={Cityname}
           />
         </View>
@@ -71,9 +68,6 @@ export const SignupInput = (
             fixAndroidTouchableBug={true} // 안드로이드 오류 해결
             useNativeAndroidPickerStyle={false} // 기본 안드로이드 스타일 제거
             onValueChange={value => setRegion(value)}
-            placeholder={{
-              label: '시군명',
-            }}
             items={cityRegion[city]}
           />
         </View>
@@ -85,9 +79,6 @@ export const SignupInput = (
           fixAndroidTouchableBug={true} // 안드로이드 오류 해결
           useNativeAndroidPickerStyle={false} // 기본 안드로이드 스타일 제거
           onValueChange={value => setFamilySituation(value)}
-          placeholder={{
-            label: '가구상황',
-          }}
           items={family}
         />
       </View>

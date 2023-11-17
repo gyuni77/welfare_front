@@ -23,7 +23,7 @@ class LoginPageService {
       console.log(token);
 
       await AsyncStorage.setItem('TOKEN', token);
-      navigation.navigate('MainPage');
+      navigation.navigate('Home');
     } catch (error) {
       console.log(error);
 
