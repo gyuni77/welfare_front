@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, View, FlatList, ActivityIndicator} from 'react-native';
+import React from 'react';
+import {StyleSheet, FlatList} from 'react-native';
 import RenderItem from './RenderItem';
 
 const WelfareContents = ({data}) => {

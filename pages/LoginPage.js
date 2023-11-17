@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {LoginInput} from '../components/LoginPageComponents/LoginInput';
 
-const LoginPage = ({navigation}) => {
+const Login = ({navigation}) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,4 +16,4 @@ const LoginPage = ({navigation}) => {
   );
 };
 
-export default LoginPage;
+export default Login;
