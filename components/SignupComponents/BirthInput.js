@@ -3,9 +3,12 @@ import {TextInput, TouchableOpacity, View} from 'react-native';
 import {styles} from '../../styles/SignupStyle';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
-export const BirthInput = (birth, setBirth) => {
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
+export const BirthInput = ({
+  birth,
+  setBirth,
+  isDatePickerVisible,
+  setDatePickerVisibility,
+}) => {
   const placeholder = '생년월일을 입력해 주세요';
 
   const showDatePicker = () => {

@@ -6,7 +6,7 @@ import {BirthInput} from '../components/SignupComponents/BirthInput';
 import {UserInfoSubmit} from '../components/SignupComponents/UserInfoSubmit';
 import {AlreadyUser} from '../components/SignupComponents/AlreadyUser';
 
-const SignupPage = () => {
+const SignupPage = ({navigation}) => {
   const [birth, setBirth] = useState('');
   const [city, setCity] = useState('서울특별시');
   const [email, setEmail] = useState('');
@@ -14,6 +14,7 @@ const SignupPage = () => {
   const [username, setUserName] = useState('');
   const [region, setRegion] = useState('');
   const [familySituation, setFamilySituation] = useState('');
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
@@ -26,9 +27,14 @@ const SignupPage = () => {
           setRegion={setRegion}
           setFamilySituation={setFamilySituation}
         />
-        <BirthInput birth={birth} setBirth={setBirth} />
+        <BirthInput
+          birth={birth}
+          setBirth={setBirth}
+          isDatePickerVisible={isDatePickerVisible}
+          setDatePickerVisibility={setDatePickerVisibility}
+        />
         <UserInfoSubmit />
-        <AlreadyUser />
+        <AlreadyUser navigation={navigation} />
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
