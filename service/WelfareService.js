@@ -1,7 +1,5 @@
 import axios from 'axios';
 import {BACKEND_URL} from '../global';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Alert} from 'react-native';
 
 class WelfareService {
   getAllDefaultData = async () => {
@@ -16,18 +14,13 @@ class WelfareService {
       });
   };
 
-  getAllDataByUserInfo = async () => {
+  getAllDataByUserInfo = async token => {
     try {
-      const token = await this.getToken();
-      if (!token) {
-        console.log('Token is null or undefined.');
-        return;
-      }
       return await axios
         .get(`${BACKEND_URL}/welfare/user`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `${token}`,
+            Authorization: token,
           },
         })
         .then(response => {
@@ -37,16 +30,11 @@ class WelfareService {
       console.log(e);
     }
   };
-  getDataBySearch = async () => {
-    try {
-      const token = await this.getToken();
 
-      if (!token) {
-        console.log('Token is null or undefined.');
-        return;
-      }
+  getDataBySearch = async keyword => {
+    try {
       return await axios
-        .get(`${BACKEND_URL}/welfare/search/${search}`, {
+        .get(`${BACKEND_URL}/welfare/search/${keyword}`, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -54,24 +42,6 @@ class WelfareService {
         .then(response => {
           return response.data;
         });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-
-  getToken = async () => {
-    try {
-      return await AsyncStorage.getItem('TOKEN');
-    } catch (e) {
-      console.log('Error getting token.');
-      return null;
-    }
-  };
-  removeToken = async () => {
-    try {
-      await AsyncStorage.removeItem('TOKEN');
-      Alert.alert('로그아웃 되었습니다');
     } catch (e) {
       console.log(e);
     }
