@@ -17,8 +17,7 @@ class UserService {
       });
 
       setToken(response.data);
-
-      navigation.navigate('Home');
+      navigation.navigate('Recommend');
     } catch (error) {
       console.log(error);
 
@@ -31,25 +30,137 @@ class UserService {
       }
     }
   };
-
-  getUserInfo = async token => {
-    if (!token) {
-      console.log('Token is null');
-      return;
-    }
-    return await axios
-      .get(`${BACKEND_URL}/auth/getUser`, {
+  Signup = (
+    email,
+    password,
+    username,
+    birth,
+    city,
+    region,
+    familySituation,
+    navigation,
+  ) => {
+    const userData = {
+      email: email,
+      password: password,
+      username: username,
+      birth: birth,
+      ctpvNm: city,
+      sggNm: region,
+      familySituation: familySituation,
+    };
+    axios
+      .post(`${BACKEND_URL}/auth/signup`, userData, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `${token}`,
         },
       })
-      .then(response => {
-        return response.data;
+      .then(() => {
+        navigation.navigate('Login');
+      })
+      .catch(err => {
+        console.log(err);
       });
+  };
+  getUserInfo = async setUser => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/auth/getUser`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  passwordChange = async (NewPassword, token) => {
+    try {
+      const newPassword = {
+        password: NewPassword,
+      };
+
+      const response = await axios.put(
+        `${BACKEND_URL}/auth/updatePassword`,
+        newPassword,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        },
+      );
+
+      console.log(response);
+      Alert.alert('변경 완료 되었습니다!');
+    } catch (error) {
+      console.log(error);
+      Alert.alert('비밀번호 변경에 실패했습니다.');
+    }
+  };
+  familySituationChange = async (user, NewFamilySituation, token) => {
+    try {
+      const newFamilySituation = {
+        ctpvNm: user.ctpvNm,
+        sggNm: user.sggNm,
+        familySituation: NewFamilySituation,
+      };
+
+      const response = await axios.put(
+        `${BACKEND_URL}/auth/updateUser`,
+        newFamilySituation,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        },
+      );
+
+      console.log(response);
+      Alert.alert('변경 완료 되었습니다!');
+    } catch (error) {
+      console.log(error);
+      Alert.alert('가구상황변경에 실패했습니다.');
+    }
+  };
+
+  regionChange = async (user, NewCity, NewRegion, token) => {
+    try {
+      const newRegion = {
+        ctpvNm: NewCity,
+        sggNm: NewRegion,
+        familySituation: user.familySituation,
+      };
+
+      const response = await axios.put(
+        `${BACKEND_URL}/auth/updateUser`,
+        newRegion,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        },
+      );
+
+      console.log(response);
+      Alert.alert('변경 완료 되었습니다!');
+    } catch (error) {
+      console.log(error);
+      Alert.alert('지역 변경에 실패했습니다.');
+    }
+  };
+
+  Logout = (navigation, setToken) => {
+    setToken(null);
+    navigation.navigate('Home');
+    Alert.alert('로그아웃 되었습니다.');
   };
 }
 
-const loginPageService = new UserService();
+const userService = new UserService();
 
-export default loginPageService;
+export default userService;
