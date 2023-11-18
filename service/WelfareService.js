@@ -3,7 +3,7 @@ import {BACKEND_URL} from '../global';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Alert} from 'react-native';
 
-class MainPageService {
+class WelfareService {
   getAllDefaultData = async () => {
     return await axios
       .get(`${BACKEND_URL}/welfare/all`, {
@@ -98,6 +98,6 @@ class MainPageService {
   };
 }
 
-const mainPageService = new MainPageService();
+const mainPageService = new WelfareService();
 
 export default mainPageService;

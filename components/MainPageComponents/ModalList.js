@@ -1,7 +1,7 @@
 import {Alert, View, Modal, TouchableOpacity, Text, Button} from 'react-native';
 import {styles} from '../../styles/MainPageStyle';
 import {useState} from 'react';
-import mainPageService from '../../service/MainPageService';
+import mainPageService from '../../service/WelfareService';
 
 export const ModalList = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);

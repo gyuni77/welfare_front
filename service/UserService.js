@@ -2,7 +2,7 @@ import {Alert} from 'react-native';
 import axios from 'axios';
 import {BACKEND_URL} from '../global';
 
-class LoginPageService {
+class UserService {
   login = async (id, password, navigation, token, setToken) => {
     try {
       const user = {
@@ -17,6 +17,7 @@ class LoginPageService {
       });
 
       setToken(response.data);
+
       navigation.navigate('Home');
     } catch (error) {
       console.log(error);
@@ -32,6 +33,6 @@ class LoginPageService {
   };
 }
 
-const loginPageService = new LoginPageService();
+const loginPageService = new UserService();
 
 export default loginPageService;

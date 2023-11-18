@@ -3,10 +3,10 @@ import {View, SafeAreaView, Button} from 'react-native';
 import WelfareContents from '../components/Common/WelfareContents';
 import {styles} from '../styles/MainPageStyle';
 import {SearchBar} from '../components/MainPageComponents/SearchBar';
-import mainPageService from '../service/MainPageService';
+import mainPageService from '../service/WelfareService';
 import {useFocusEffect} from '@react-navigation/native';
 
-const MainPage = () => {
+const MainPage = ({token, setToken, navigation}) => {
   const [searchedWelfare, setSearchedWelfare] = useState([]);
   useFocusEffect(
     React.useCallback(() => {

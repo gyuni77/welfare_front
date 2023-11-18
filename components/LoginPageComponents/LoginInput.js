@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from '../../styles/LoginPageStyle';
-import loginPageService from '../../service/LoginPageService';
+import loginPageService from '../../service/UserService';
 
 export const LoginInput = ({
   navigation,
