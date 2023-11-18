@@ -43,7 +43,9 @@ export const LoginInput = ({
         <View style={styles.button}>
           <Button
             onPress={() => {
-              userService.login(id, password, navigation, setToken);
+              userService.login(id, password).then(data => {
+                setToken(data), navigation.navigate('Recommend');
+              });
             }}
             title="로그인 하기"
           />

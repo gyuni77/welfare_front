@@ -3,7 +3,7 @@ import axios from 'axios';
 import {BACKEND_URL} from '../global';
 
 class UserService {
-  login = async (id, password, navigation, setToken) => {
+  login = async (id, password) => {
     try {
       const user = {
         email: id,
@@ -15,8 +15,7 @@ class UserService {
           'Content-Type': 'application/json',
         },
       });
-      const data = response.data;
-      this.saveToken(data, navigation, setToken);
+      return response.data;
     } catch (error) {
       console.log(error);
 
@@ -28,11 +27,6 @@ class UserService {
         Alert.alert('로그인 실패', '알 수 없는 오류가 발생했습니다');
       }
     }
-  };
-
-  saveToken = (data, navigation, setToken) => {
-    setToken(data);
-    navigation.navigate('Recommend');
   };
 
   Signup = (
