@@ -10,7 +10,15 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from '../../styles/LoginPageStyle';
 import loginPageService from '../../service/LoginPageService';
 
-export const LoginInput = ({navigation, id, password, setId, setPassword}) => {
+export const LoginInput = ({
+  navigation,
+  id,
+  password,
+  setId,
+  setPassword,
+  token,
+  setToken,
+}) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
@@ -35,7 +43,7 @@ export const LoginInput = ({navigation, id, password, setId, setPassword}) => {
         <View style={styles.button}>
           <Button
             onPress={() => {
-              loginPageService.login(id, password);
+              loginPageService.login(id, password, navigation, token, setToken);
             }}
             title="로그인 하기"
           />

@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {LoginInput} from '../components/LoginPageComponents/LoginInput';
 
-const Login = ({navigation}) => {
+const Login = ({navigation, token, setToken}) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -9,6 +9,8 @@ const Login = ({navigation}) => {
     <LoginInput
       id={id}
       password={password}
+      token={token}
+      setToken={setToken}
       setId={setId}
       setPassword={setPassword}
       navigation={navigation}

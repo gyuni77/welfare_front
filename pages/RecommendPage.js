@@ -1,13 +1,13 @@
 import React from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 
-const RecommendPage = ({navigation, isLogin}) => {
+const RecommendPage = ({navigation, token}) => {
   useFocusEffect(
     React.useCallback(() => {
-      if (!isLogin) {
+      if (!token) {
         navigation.navigate('Login');
       }
-    }, [navigation, isLogin]),
+    }, [navigation, token]),
   );
 
   return <></>;
