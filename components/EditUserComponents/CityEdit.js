@@ -3,17 +3,17 @@ import {pickerSelectCity} from '../../styles/EditUserStyle';
 import {Button, TouchableOpacity, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import userService from '../../service/UserService';
+import {useFocusEffect} from '@react-navigation/native';
+import React from 'react';
 
 export const CityEdit = ({
   user,
   NewCity,
   NewRegion,
-  setUser,
   setNewCity,
   setNewRegion,
   token,
 }) => {
-  userService.getUserInfo(setUser, token);
   const handleCityChange = value => {
     setNewCity(value);
     setNewRegion('');
