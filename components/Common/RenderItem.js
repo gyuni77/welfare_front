@@ -1,4 +1,4 @@
-import {Alert, Button, Linking, Pressable, Text, View} from 'react-native';
+import {Button, Linking, Pressable, Text, View} from 'react-native';
 import {styles} from '../../styles/MainPageStyle';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faBookmark as fullFaBookmark} from '@fortawesome/free-solid-svg-icons';
@@ -23,11 +23,25 @@ const RenderItem = ({
     // }
   };
 
+  const fullBookmarkPress = welfareId => {
+    const findBookmark = bookmarkList.find(
+      bookmark => bookmark.servId === welfareId,
+    );
+    console.log(findBookmark);
+    bookmarkService.deleteBookmark(token, findBookmark.id).then(() => {
+      setBookmarkList(
+        bookmarkList.filter(bookmark => {
+          return bookmark !== findBookmark;
+        }),
+      );
+    });
+  };
+
   const emptyBookmarkPress = welfareId => {
-    console.log(token);
     if (token) {
-      bookmarkService.registerBookmark(token, welfareId);
-      setBookmarkList([...bookmarkList, welfareId]);
+      bookmarkService.registerBookmark(token, welfareId).then(newBookmark => {
+        setBookmarkList([...bookmarkList, newBookmark]);
+      });
     } else {
       navigation.navigate('Login');
     }
@@ -39,8 +53,13 @@ const RenderItem = ({
         <Text style={styles.TextTitle} numberOfLines={2}>
           {welfare.servNm}
         </Text>
-        {bookmarkList.includes(welfare.servId) ? (
-          <FontAwesomeIcon icon={fullFaBookmark} size={48} />
+        {bookmarkList.some(bookmark => bookmark.servId === welfare.servId) ? (
+          <Pressable
+            onPress={() => {
+              fullBookmarkPress(welfare.servId);
+            }}>
+            <FontAwesomeIcon icon={fullFaBookmark} size={48} />
+          </Pressable>
         ) : (
           <Pressable
             onPress={() => {

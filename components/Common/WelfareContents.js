@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlatList} from 'react-native';
 import RenderItem from './RenderItem';
+import { useFocusEffect } from "@react-navigation/native";
 
 const WelfareContents = ({
   welfareList,

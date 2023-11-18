@@ -20,9 +20,7 @@ const MainPage = ({token, setToken, navigation}) => {
       //bookmark init
       if (token) {
         userService.getUserInfo(token).then(user => {
-          setBookmarkedWelfareList(
-            user.bookmarks.map(welfare => welfare.servId),
-          );
+          setBookmarkedWelfareList(user.bookmarks);
         });
       }
     }, [token]),
