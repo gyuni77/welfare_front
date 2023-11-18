@@ -10,12 +10,19 @@ import userService from '../service/UserService';
 const MainPage = ({token, setToken, navigation}) => {
   const [welfareList, setWelfareList] = useState([]);
   const [bookmarkedWelfareList, setBookmarkedWelfareList] = useState([]);
+  const [keyword, setKeyword] = useState('');
   useFocusEffect(
     React.useCallback(() => {
       //welfare content init
-      mainPageService.getAllDefaultData().then(data => {
-        setWelfareList(data);
-      });
+      if (!keyword) {
+        mainPageService.getAllDefaultData().then(data => {
+          setWelfareList(data);
+        });
+      } else {
+        mainPageService.getDataBySearch(keyword).then(data => {
+          setWelfareList(data);
+        });
+      }
 
       //bookmark init
       if (token) {
@@ -23,14 +30,13 @@ const MainPage = ({token, setToken, navigation}) => {
           setBookmarkedWelfareList(user.bookmarks);
         });
       }
-    }, [token]),
+    }, [token, keyword]),
   );
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={{flexDirection: 'row'}}>
-        <SearchBar />
-        <Button title="검색" />
+        <SearchBar setKeyword={setKeyword} />
       </View>
       <WelfareContents
         welfareList={welfareList}

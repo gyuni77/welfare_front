@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {TextInput, View} from 'react-native';
 
-export const SearchBar = () => {
-  const [search, setSearch] = useState('');
-
+export const SearchBar = ({setKeyword}) => {
   return (
     <View style={{alignItems: 'center'}}>
       <TextInput
@@ -16,8 +14,7 @@ export const SearchBar = () => {
         }}
         placeholder="제목으로 검색하세요"
         returnKeyType="search"
-        //   onSubmitEditing={clickSearch}
-        onChangeText={text => setSearch(text)}
+        onChangeText={text => setKeyword(text)}
       />
     </View>
   );
