@@ -5,15 +5,27 @@ import {styles} from '../styles/MainPageStyle';
 import {SearchBar} from '../components/MainPageComponents/SearchBar';
 import mainPageService from '../service/WelfareService';
 import {useFocusEffect} from '@react-navigation/native';
+import userService from '../service/UserService';
 
 const MainPage = ({token, setToken, navigation}) => {
-  const [searchedWelfare, setSearchedWelfare] = useState([]);
+  const [welfareList, setWelfareList] = useState([]);
+  const [bookmarkedWelfareList, setBookmarkedWelfareList] = useState([]);
   useFocusEffect(
     React.useCallback(() => {
+      //welfare content init
       mainPageService.getAllDefaultData().then(data => {
-        setSearchedWelfare(data);
+        setWelfareList(data);
       });
-    }, []),
+
+      //bookmark init
+      if (token) {
+        userService.getUserInfo(token).then(user => {
+          setBookmarkedWelfareList(
+            user.bookmarks.map(welfare => welfare.servId),
+          );
+        });
+      }
+    }, [token]),
   );
 
   return (
@@ -22,7 +34,13 @@ const MainPage = ({token, setToken, navigation}) => {
         <SearchBar />
         <Button title="검색" />
       </View>
-      <WelfareContents data={searchedWelfare} />
+      <WelfareContents
+        welfareList={welfareList}
+        bookmarkList={bookmarkedWelfareList}
+        setBookmarkList={setBookmarkedWelfareList}
+        token={token}
+        navigation={navigation}
+      />
     </SafeAreaView>
   );
 };

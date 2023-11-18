@@ -5,7 +5,6 @@ import {family} from '../Common/CityRegionFamily';
 import {BACKEND_URL} from '../../global';
 import RNPickerSelect from 'react-native-picker-select';
 import axios from 'axios';
-import editUserService from '../../service/EditUserService';
 
 export const FamilyEdit = () => {
   const [NewFamilySituation, setNewFamilySituation] = useState('');

@@ -1,7 +1,6 @@
 import {Cityname, cityRegion} from '../Common/CityRegionFamily';
 import {pickerSelectCity} from '../../styles/EditUserStyle';
 import {BACKEND_URL} from '../../global';
-import editUserService from '../../service/EditUserService';
 import {useState, Alert} from 'react';
 import {Button, TouchableOpacity, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';

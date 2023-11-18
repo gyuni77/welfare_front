@@ -31,6 +31,23 @@ class UserService {
       }
     }
   };
+
+  getUserInfo = async token => {
+    if (!token) {
+      console.log('Token is null');
+      return;
+    }
+    return await axios
+      .get(`${BACKEND_URL}/auth/getUser`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      })
+      .then(response => {
+        return response.data;
+      });
+  };
 }
 
 const loginPageService = new UserService();
