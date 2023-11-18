@@ -11,7 +11,7 @@ export const FamilyEdit = ({
   NewFamilySituation,
   setNewFamilySituation,
 }) => {
-  userService.getUserInfo(setUser);
+  userService.getUserInfo(setUser, token);
   return (
     <View style={{flexDirection: 'row'}}>
       <RNPickerSelect
