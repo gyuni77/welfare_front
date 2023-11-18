@@ -3,15 +3,14 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import {family} from '../Common/CityRegionFamily';
 import RNPickerSelect from 'react-native-picker-select';
 import userService from '../../service/UserService';
+import React from 'react';
 
 export const FamilyEdit = ({
   token,
   user,
-  setUser,
   NewFamilySituation,
   setNewFamilySituation,
 }) => {
-  userService.getUserInfo(setUser, token);
   return (
     <View style={{flexDirection: 'row'}}>
       <RNPickerSelect

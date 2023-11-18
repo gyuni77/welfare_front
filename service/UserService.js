@@ -3,7 +3,7 @@ import axios from 'axios';
 import {BACKEND_URL} from '../global';
 
 class UserService {
-  login = async (id, password, navigation, token, setToken) => {
+  login = async (id, password, navigation, setToken) => {
     try {
       const user = {
         email: id,
@@ -15,9 +15,8 @@ class UserService {
           'Content-Type': 'application/json',
         },
       });
-
-      setToken(response.data);
-      navigation.navigate('Recommend');
+      const data = response.data;
+      this.saveToken(data, navigation, setToken);
     } catch (error) {
       console.log(error);
 
@@ -30,6 +29,12 @@ class UserService {
       }
     }
   };
+
+  saveToken = (data, navigation, setToken) => {
+    setToken(data);
+    navigation.navigate('Recommend');
+  };
+
   Signup = (
     email,
     password,
@@ -62,7 +67,7 @@ class UserService {
         console.log(err);
       });
   };
-  getUserInfo = async (setUser, token) => {
+  getUserInfo = async token => {
     try {
       const response = await axios.get(`${BACKEND_URL}/auth/getUser`, {
         headers: {
@@ -70,7 +75,7 @@ class UserService {
           Authorization: token,
         },
       });
-      setUser(response.data);
+      return response.data;
     } catch (error) {
       console.log(error);
     }

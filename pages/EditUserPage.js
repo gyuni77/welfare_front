@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, TouchableWithoutFeedback, Keyboard} from 'react-native';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {styles} from '../styles/EditUserStyle';
 import {PasswordEdit} from '../components/EditUserComponents/PasswordEdit';
 import {FamilyEdit} from '../components/EditUserComponents/FamilyEdit';
 import {CityEdit} from '../components/EditUserComponents/CityEdit';
 import {Logout} from '../components/EditUserComponents/Logout';
+import userService from '../service/UserService';
 
 const EditUserPage = ({navigation, token, setToken}) => {
   const [user, setUser] = useState('');
@@ -14,6 +13,12 @@ const EditUserPage = ({navigation, token, setToken}) => {
   const [NewFamilySituation, setNewFamilySituation] = useState('');
   const [NewCity, setNewCity] = useState('서울특별시');
   const [NewRegion, setNewRegion] = useState('');
+
+  useEffect(() => {
+    userService.getUserInfo(token).then(userInfo => {
+      setUser(userInfo);
+    });
+  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -25,7 +30,6 @@ const EditUserPage = ({navigation, token, setToken}) => {
         />
         <FamilyEdit
           user={user}
-          setUser={setUser}
           NewFamilySituation={NewFamilySituation}
           setNewFamilySituation={setNewFamilySituation}
           token={token}
@@ -34,7 +38,6 @@ const EditUserPage = ({navigation, token, setToken}) => {
           user={user}
           NewCity={NewCity}
           NewRegion={NewRegion}
-          setUser={setUser}
           setNewCity={setNewCity}
           setNewRegion={setNewRegion}
           token={token}
