@@ -6,60 +6,43 @@ import {styles} from '../styles/EditUserStyle';
 import {PasswordEdit} from '../components/EditUserComponents/PasswordEdit';
 import {FamilyEdit} from '../components/EditUserComponents/FamilyEdit';
 import {CityEdit} from '../components/EditUserComponents/CityEdit';
-import {BackMain} from '../components/EditUserComponents/BackMain';
+import {Logout} from '../components/EditUserComponents/Logout';
 
-const Profile = () => {
+const EditUserPage = ({navigation, token, setToken}) => {
   const [user, setUser] = useState('');
-
-  const getToken = async () => {
-    try {
-      return await AsyncStorage.getItem('TOKEN');
-    } catch (e) {
-      console.log(e);
-      console.log('Error getting token.');
-      return null;
-    }
-  };
-  const getUser = async () => {
-    try {
-      const token = await getToken();
-
-      if (!token) {
-        console.log('Token is null or undefined.');
-        return;
-      }
-
-      const response = await axios.get(
-        'http://ykh8746.iptime.org:8080/auth/getUser',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `${token}`,
-          },
-        },
-      );
-
-      setUser(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-  useEffect(() => {}, [user]);
+  const [NewPassword, setNewPassword] = useState('');
+  const [NewFamilySituation, setNewFamilySituation] = useState('');
+  const [NewCity, setNewCity] = useState('서울특별시');
+  const [NewRegion, setNewRegion] = useState('');
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
-        <PasswordEdit />
-        <FamilyEdit />
-        <CityEdit />
-        <BackMain />
+        <PasswordEdit
+          token={token}
+          NewPassword={NewPassword}
+          setNewPassword={setNewPassword}
+        />
+        <FamilyEdit
+          user={user}
+          setUser={setUser}
+          NewFamilySituation={NewFamilySituation}
+          setNewFamilySituation={setNewFamilySituation}
+          token={token}
+        />
+        <CityEdit
+          user={user}
+          NewCity={NewCity}
+          NewRegion={NewRegion}
+          setUser={setUser}
+          setNewCity={setNewCity}
+          setNewRegion={setNewRegion}
+          token={token}
+        />
+        <Logout navigation={navigation} setToken={setToken} />
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 };
 
-export default Profile;
+export default EditUserPage;

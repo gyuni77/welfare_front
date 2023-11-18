@@ -33,7 +33,16 @@ const SignupPage = ({navigation}) => {
           isDatePickerVisible={isDatePickerVisible}
           setDatePickerVisibility={setDatePickerVisibility}
         />
-        <UserInfoSubmit />
+        <UserInfoSubmit
+          city={city}
+          email={email}
+          password={password}
+          username={username}
+          region={region}
+          familySituation={familySituation}
+          birth={birth}
+          navigation={navigation}
+        />
         <AlreadyUser navigation={navigation} />
       </SafeAreaView>
     </TouchableWithoutFeedback>
