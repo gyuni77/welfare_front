@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from '../../styles/LoginPageStyle';
-import loginPageService from '../../service/UserService';
+import userService from '../../service/UserService';
 
 export const LoginInput = ({
   navigation,
@@ -43,7 +43,7 @@ export const LoginInput = ({
         <View style={styles.button}>
           <Button
             onPress={() => {
-              loginPageService.login(id, password, navigation, token, setToken);
+              userService.login(id, password, navigation, token, setToken);
             }}
             title="로그인 하기"
           />
