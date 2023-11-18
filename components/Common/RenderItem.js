@@ -25,7 +25,7 @@ const RenderItem = ({
 
   const fullBookmarkPress = welfareId => {
     const findBookmark = bookmarkList.find(
-      bookmark => bookmark.servId === welfareId,
+      bookmark => bookmark.welfare.servId === welfareId,
     );
     console.log(findBookmark);
     bookmarkService.deleteBookmark(token, findBookmark.id).then(() => {
@@ -53,7 +53,9 @@ const RenderItem = ({
         <Text style={styles.TextTitle} numberOfLines={2}>
           {welfare.servNm}
         </Text>
-        {bookmarkList.some(bookmark => bookmark.servId === welfare.servId) ? (
+        {bookmarkList.some(
+          bookmark => bookmark.welfare.servId === welfare.servId,
+        ) ? (
           <Pressable
             onPress={() => {
               fullBookmarkPress(welfare.servId);
