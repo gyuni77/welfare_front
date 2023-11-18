@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 
-const BookmarkPage = ({navigation, isLogin}) => {
+const BookmarkPage = ({navigation, token}) => {
   useFocusEffect(
     React.useCallback(() => {
-      if (!isLogin) {
+      if (!token) {
         navigation.navigate('Login');
       }
-    }, [navigation, isLogin]),
+    }, [navigation, token]),
   );
 
   return <></>;

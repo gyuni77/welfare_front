@@ -1,12 +1,9 @@
 import {Alert} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import {BACKEND_URL} from '../global';
 
 class LoginPageService {
-  postLogin = async () => {};
-
-  login = async (id, password, navigation) => {
+  login = async (id, password, navigation, token, setToken) => {
     try {
       const user = {
         email: id,
@@ -19,10 +16,7 @@ class LoginPageService {
         },
       });
 
-      const token = response.data;
-      console.log(token);
-
-      await AsyncStorage.setItem('TOKEN', token);
+      setToken(response.data);
       navigation.navigate('Home');
     } catch (error) {
       console.log(error);

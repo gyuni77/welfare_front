@@ -18,27 +18,27 @@ const App = () => {
       <Tab.Navigator>
         <Tab.Screen
           name="Home"
-          component={MainPage}
-          token={token}
-          setToken={setToken}
+          children={props => (
+            <MainPage {...props} token={token} setToken={setToken} />
+          )}
           options={{
             headerShown: false,
           }}
         />
         <Tab.Screen
           name="Recommend"
-          component={RecommendPage}
-          token={token}
-          setToken={setToken}
+          children={props => (
+            <RecommendPage {...props} token={token} setToken={setToken} />
+          )}
           options={{
             headerShown: false,
           }}
         />
         <Tab.Screen
           name="Bookmark"
-          component={BookmarkPage}
-          token={token}
-          setToken={setToken}
+          children={props => (
+            <BookmarkPage {...props} token={token} setToken={setToken} />
+          )}
           options={{
             headerShown: false,
           }}
@@ -46,9 +46,9 @@ const App = () => {
         {token ? (
           <Tab.Screen
             name="Profile"
-            component={EditUserPage}
-            token={token}
-            setToken={setToken}
+            children={props => (
+              <EditUserPage {...props} token={token} setToken={setToken} />
+            )}
             options={{
               headerShown: false,
             }}
@@ -56,9 +56,9 @@ const App = () => {
         ) : (
           <Tab.Screen
             name="Login"
-            component={LoginPage}
-            token={token}
-            setToken={setToken}
+            children={props => (
+              <LoginPage {...props} token={token} setToken={setToken} />
+            )}
             options={{
               headerShown: false,
             }}
@@ -66,9 +66,9 @@ const App = () => {
         )}
         <Tab.Screen
           name="Signup"
-          component={SignupPage}
-          token={token}
-          setToken={setToken}
+          children={props => (
+            <SignupPage {...props} token={token} setToken={setToken} />
+          )}
           options={{
             headerShown: false,
             tabBarButton: () => null,
