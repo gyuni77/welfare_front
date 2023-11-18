@@ -62,7 +62,7 @@ class UserService {
         console.log(err);
       });
   };
-  getUserInfo = async setUser => {
+  getUserInfo = async (setUser, token) => {
     try {
       const response = await axios.get(`${BACKEND_URL}/auth/getUser`, {
         headers: {

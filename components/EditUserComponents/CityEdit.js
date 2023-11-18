@@ -13,8 +13,7 @@ export const CityEdit = ({
   setNewRegion,
   token,
 }) => {
-  userService.getUserInfo(setUser);
-
+  userService.getUserInfo(setUser, token);
   const handleCityChange = value => {
     setNewCity(value);
     setNewRegion('');
