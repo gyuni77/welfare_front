@@ -32,6 +32,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 10,
     fontSize: 15,
+    color: 'black',
     fontFamily: 'The_Jamsil_3',
     paddingHorizontal: 20,
   },
