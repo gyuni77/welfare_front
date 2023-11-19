@@ -24,7 +24,6 @@ const EditUserPage = ({navigation, token, setToken}) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
-        <Header />
         <PasswordEdit
           token={token}
           NewPassword={NewPassword}

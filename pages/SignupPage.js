@@ -19,7 +19,6 @@ const SignupPage = ({navigation}) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
-        <Header />
         <SignupInput
           city={city}
           setEmail={setEmail}
