@@ -5,20 +5,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  modalContanier: {
-    marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   welFare: {
     borderWidth: 1,
-    width: 100,
     height: 140,
-    marginLeft: 5,
-    marginBottom: 10,
-    borderRadius: 5,
+    margin: 20,
+    marginTop: 5,
+    borderRadius: 10,
   },
   TextTitle: {
     fontSize: 15,

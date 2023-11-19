@@ -1,8 +1,8 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import RenderItem from './RenderItem';
+import RecommendRenderItem from './RecommendRenderItem';
 
-const WelfareContents = ({
+const RecommendWelfareContents = ({
   welfareList,
   bookmarkList,
   setBookmarkList,
@@ -13,7 +13,7 @@ const WelfareContents = ({
     <FlatList
       data={welfareList}
       renderItem={({item}) => (
-        <RenderItem
+        <RecommendRenderItem
           welfare={item}
           bookmarkList={bookmarkList}
           setBookmarkList={setBookmarkList}
@@ -21,11 +21,11 @@ const WelfareContents = ({
           navigation={navigation}
         />
       )}
-      // numColumns={2}
-      // columnWrapperStyle={{justifyContent: 'space-between'}}
-      // contentContainerStyle={{padding: 10}}
+      numColumns={2}
+      columnWrapperStyle={{justifyContent: 'space-between'}}
+      contentContainerStyle={{padding: 10}}
     />
   );
 };
 
-export default WelfareContents;
+export default RecommendWelfareContents;

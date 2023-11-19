@@ -13,7 +13,6 @@ const MainPage = ({token, setToken, navigation}) => {
   const [keyword, setKeyword] = useState('');
   useFocusEffect(
     React.useCallback(() => {
-      //welfare content init
       if (!keyword) {
         mainPageService.getAllDefaultData().then(data => {
           setWelfareList(data);
