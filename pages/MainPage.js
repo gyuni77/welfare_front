@@ -35,7 +35,6 @@ const MainPage = ({token, setToken, navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
       <View style={{flexDirection: 'row'}}>
         <SearchBar setKeyword={setKeyword} />
       </View>

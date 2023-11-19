@@ -11,7 +11,6 @@ const Login = ({navigation, token, setToken}) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
-        <Header />
         <LoginInput
           id={id}
           password={password}

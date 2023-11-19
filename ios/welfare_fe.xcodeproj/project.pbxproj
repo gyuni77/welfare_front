@@ -14,6 +14,10 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-welfare_fe-welfare_feTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-welfare_fe-welfare_feTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		D3CC392AE0CF4AA68CBC83A5 /* The_Jamsil_1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 314F5FD35CC849CB9508F2E0 /* The_Jamsil_1.ttf */; };
+		B7F885D061E7462FB4B8D5E7 /* The_Jamsil_3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7AE337A394CF4A24B6BB0849 /* The_Jamsil_3.ttf */; };
+		E67A343D49E141FC9B5168AC /* The_Jamsil_4.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD16EBCC973A472C8058718E /* The_Jamsil_4.ttf */; };
+		C076C64D14EF4A0EAB0E56A3 /* The_Jamsil_5.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F4026F1553548888A44DE2C /* The_Jamsil_5.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = welfare_fe/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-welfare_fe-welfare_feTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-welfare_fe-welfare_feTests.release.xcconfig"; path = "Target Support Files/Pods-welfare_fe-welfare_feTests/Pods-welfare_fe-welfare_feTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		314F5FD35CC849CB9508F2E0 /* The_Jamsil_1.ttf */ = {isa = PBXFileReference; name = "The_Jamsil_1.ttf"; path = "../assets/fonts/The_Jamsil_1.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7AE337A394CF4A24B6BB0849 /* The_Jamsil_3.ttf */ = {isa = PBXFileReference; name = "The_Jamsil_3.ttf"; path = "../assets/fonts/The_Jamsil_3.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FD16EBCC973A472C8058718E /* The_Jamsil_4.ttf */ = {isa = PBXFileReference; name = "The_Jamsil_4.ttf"; path = "../assets/fonts/The_Jamsil_4.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5F4026F1553548888A44DE2C /* The_Jamsil_5.ttf */ = {isa = PBXFileReference; name = "The_Jamsil_5.ttf"; path = "../assets/fonts/The_Jamsil_5.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +130,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				4BA6D3BBC4B847FA8A4C1409 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +156,18 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		4BA6D3BBC4B847FA8A4C1409 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				314F5FD35CC849CB9508F2E0 /* The_Jamsil_1.ttf */,
+				7AE337A394CF4A24B6BB0849 /* The_Jamsil_3.ttf */,
+				FD16EBCC973A472C8058718E /* The_Jamsil_4.ttf */,
+				5F4026F1553548888A44DE2C /* The_Jamsil_5.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -244,6 +265,10 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				D3CC392AE0CF4AA68CBC83A5 /* The_Jamsil_1.ttf in Resources */,
+				B7F885D061E7462FB4B8D5E7 /* The_Jamsil_3.ttf in Resources */,
+				E67A343D49E141FC9B5168AC /* The_Jamsil_4.ttf in Resources */,
+				C076C64D14EF4A0EAB0E56A3 /* The_Jamsil_5.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

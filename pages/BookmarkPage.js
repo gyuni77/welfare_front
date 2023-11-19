@@ -26,7 +26,6 @@ const BookmarkPage = ({navigation, token}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
       <WelfareContents
         welfareList={welfareList}
         bookmarkList={bookmarkList}

@@ -23,7 +23,6 @@ const RecommendPage = ({navigation, token}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
       <RecommendWelfareContents
         welfareList={RecommendWelfareList}
         bookmarkList={bookmarkedWelfareList}
