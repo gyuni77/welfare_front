@@ -81,23 +81,24 @@ export const BirthInput = ({
   };
 
   return (
-    <TouchableOpacity onPress={showDatePicker}>
-      <TextInput
-        pointerEvents="none"
-        style={styles.TextInput}
-        placeholder={placeholder}
-        placeholderTextColor="#000000"
-        underlineColorAndroid="transparent"
-        editable={false}
-        value={birth}
-      />
-      <DateTimePickerModal
-        headerTextIOS={placeholder}
-        isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-      />
-    </TouchableOpacity>
+    <View style={{}}>
+      <TouchableOpacity onPress={showDatePicker}>
+        <TextInput
+          pointerEvents="none"
+          style={styles.TextInput}
+          placeholder={placeholder}
+          underlineColorAndroid="transparent"
+          editable={false}
+          value={birth}
+        />
+        <DateTimePickerModal
+          headerTextIOS={placeholder}
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
+      </TouchableOpacity>
+    </View>
   );
 };

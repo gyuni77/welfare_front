@@ -52,7 +52,12 @@ export const LoginInput = ({
           />
         </View>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Signup')}>
-          <Text style={{fontSize: 12, color: '#007AFF'}}>
+          <Text
+            style={{
+              fontSize: 12,
+              color: '#007AFF',
+              fontFamily: 'The_Jamsil_3',
+            }}>
             계정이 없으신가요? 여기서 가입하세요!
           </Text>
         </TouchableWithoutFeedback>

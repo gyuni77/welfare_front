@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   },
   login: {
     fontSize: 30,
+    fontFamily: 'The_Jamsil_3',
   },
   IdInput: {
     width: 200,
@@ -20,6 +21,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 15,
     paddingHorizontal: 20,
+    fontFamily: 'The_Jamsil_3',
   },
   TextInput: {
     width: 300,
@@ -30,6 +32,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 10,
     fontSize: 15,
+    fontFamily: 'The_Jamsil_3',
     paddingHorizontal: 20,
   },
   doubleCheck: {
@@ -65,6 +68,7 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 20,
     paddingVertical: 20,
+    fontFamily: 'The_Jamsil_3',
   },
 });
 
@@ -80,6 +84,8 @@ export const pickerSelectCity = StyleSheet.create({
     borderRadius: 12,
     padding: 10,
     marginLeft: 3,
+    color: 'black',
+    fontFamily: 'The_Jamsil_3',
   },
   inputAndroid: {
     marginTop: 10,
@@ -91,6 +97,8 @@ export const pickerSelectCity = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     padding: 10,
+    color: 'black',
+    fontFamily: 'The_Jamsil_3',
   },
 });
 
@@ -105,6 +113,8 @@ export const pickerSelecFamily = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     padding: 10,
+    color: 'black',
+    fontFamily: 'The_Jamsil_3',
   },
   inputAndroid: {
     marginTop: 10,
@@ -116,5 +126,7 @@ export const pickerSelecFamily = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     padding: 10,
+    color: 'black',
+    fontFamily: 'The_Jamsil_3',
   },
 });
