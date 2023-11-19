@@ -4,6 +4,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import RecommendWelfareContents from '../components/RecommendComponents/RecommendWelfareContents';
 import {styles} from '../styles/MainPageStyle';
 import mainPageService from '../service/WelfareService';
+import {Header} from '../components/Common/Header';
 
 const RecommendPage = ({navigation, token}) => {
   const [RecommendWelfareList, setRecommendWelfareList] = useState([]);
@@ -22,6 +23,7 @@ const RecommendPage = ({navigation, token}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header />
       <RecommendWelfareContents
         welfareList={RecommendWelfareList}
         bookmarkList={bookmarkedWelfareList}

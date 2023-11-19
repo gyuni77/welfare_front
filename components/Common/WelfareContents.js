@@ -21,9 +21,8 @@ const WelfareContents = ({
           navigation={navigation}
         />
       )}
-      // numColumns={2}
-      // columnWrapperStyle={{justifyContent: 'space-between'}}
-      // contentContainerStyle={{padding: 10}}
+      numColumns={2}
+      columnWrapperStyle={{justifyContent: 'space-between'}}
     />
   );
 };

@@ -3,12 +3,13 @@ import {TextInput, View} from 'react-native';
 
 export const SearchBar = ({setKeyword}) => {
   return (
-    <View style={{alignItems: 'center'}}>
+    <View>
       <TextInput
         style={{
           borderWidth: 1,
+          borderColor: 'gray',
           backgroundColor: 'white',
-          width: 300,
+          width: 370,
           borderRadius: 10,
           margin: 10,
         }}

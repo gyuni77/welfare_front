@@ -5,6 +5,7 @@ import {Button, FlatList, SafeAreaView, View} from 'react-native';
 import {styles} from '../styles/MainPageStyle';
 import RenderItem from '../components/Common/RenderItem';
 import WelfareContents from '../components/Common/WelfareContents';
+import {Header} from '../components/Common/Header';
 
 const BookmarkPage = ({navigation, token}) => {
   const [welfareList, setWelfareList] = useState([]);
@@ -25,6 +26,7 @@ const BookmarkPage = ({navigation, token}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header />
       <WelfareContents
         welfareList={welfareList}
         bookmarkList={bookmarkList}
