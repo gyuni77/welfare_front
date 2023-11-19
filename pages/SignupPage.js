@@ -5,6 +5,7 @@ import {SignupInput} from '../components/SignupComponents/SignupInput';
 import {BirthInput} from '../components/SignupComponents/BirthInput';
 import {UserInfoSubmit} from '../components/SignupComponents/UserInfoSubmit';
 import {AlreadyUser} from '../components/SignupComponents/AlreadyUser';
+import {Header} from '../components/Common/Header';
 
 const SignupPage = ({navigation}) => {
   const [birth, setBirth] = useState('');
@@ -18,6 +19,7 @@ const SignupPage = ({navigation}) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
+        <Header />
         <SignupInput
           city={city}
           setEmail={setEmail}

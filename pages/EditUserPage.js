@@ -6,6 +6,7 @@ import {FamilyEdit} from '../components/EditUserComponents/FamilyEdit';
 import {CityEdit} from '../components/EditUserComponents/CityEdit';
 import {Logout} from '../components/EditUserComponents/Logout';
 import userService from '../service/UserService';
+import {Header} from '../components/Common/Header';
 
 const EditUserPage = ({navigation, token, setToken}) => {
   const [user, setUser] = useState('');
@@ -23,6 +24,7 @@ const EditUserPage = ({navigation, token, setToken}) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
+        <Header />
         <PasswordEdit
           token={token}
           NewPassword={NewPassword}

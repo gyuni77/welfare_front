@@ -6,6 +6,7 @@ import {SearchBar} from '../components/MainPageComponents/SearchBar';
 import mainPageService from '../service/WelfareService';
 import {useFocusEffect} from '@react-navigation/native';
 import userService from '../service/UserService';
+import {Header} from '../components/Common/Header';
 
 const MainPage = ({token, setToken, navigation}) => {
   const [welfareList, setWelfareList] = useState([]);
@@ -34,6 +35,7 @@ const MainPage = ({token, setToken, navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header />
       <View style={{flexDirection: 'row'}}>
         <SearchBar setKeyword={setKeyword} />
       </View>
