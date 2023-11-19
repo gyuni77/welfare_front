@@ -29,6 +29,8 @@ const MainPage = ({token, setToken, navigation}) => {
         userService.getUserInfo(token).then(user => {
           setBookmarkedWelfareList(user.bookmarks);
         });
+      } else {
+        setBookmarkedWelfareList([]);
       }
     }, [token, keyword]),
   );
