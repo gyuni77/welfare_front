@@ -1,4 +1,11 @@
-import {Button, Linking, Pressable, Text, View} from 'react-native';
+import {
+  Button,
+  Linking,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {styles} from '../../styles/MainPageStyle';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faBookmark as fullFaBookmark} from '@fortawesome/free-solid-svg-icons';
@@ -53,6 +60,24 @@ const RecommendRenderItem = ({
         <Text style={styles.TextTitle} numberOfLines={2}>
           {welfare.servNm}
         </Text>
+      </View>
+      <Text style={styles.TextContents} numberOfLines={3}>
+        {welfare.servDgst}
+      </Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+        }}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => {
+            detailButtonPress(welfare.servDtlLink);
+          }}>
+          <Text style={{color: '#2196F3', fontSize: 13, fontWeight: 'bold'}}>
+            자세히 보기
+          </Text>
+        </TouchableOpacity>
         {bookmarkList.some(
           bookmark => bookmark.welfare.servId === welfare.servId,
         ) ? (
@@ -60,26 +85,17 @@ const RecommendRenderItem = ({
             onPress={() => {
               fullBookmarkPress(welfare.servId);
             }}>
-            <FontAwesomeIcon icon={fullFaBookmark} size={48} />
+            <FontAwesomeIcon icon={fullFaBookmark} size={30} />
           </Pressable>
         ) : (
           <Pressable
             onPress={() => {
               emptyBookmarkPress(welfare.servId);
             }}>
-            <FontAwesomeIcon icon={emptyFaBookmark} size={48} />
+            <FontAwesomeIcon icon={emptyFaBookmark} size={30} />
           </Pressable>
         )}
       </View>
-      <Text style={styles.TextContents} numberOfLines={3}>
-        {welfare.servDgst}
-      </Text>
-      <Button
-        title="자세히"
-        onPress={() => {
-          detailButtonPress(welfare.servDtlLink);
-        }}
-      />
     </View>
   );
 };

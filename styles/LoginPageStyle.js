@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
   },
   login: {
     fontSize: 30,
+    fontFamily: 'The_Jamsil_3',
   },
   TextInput: {
     width: 300,
@@ -19,6 +20,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 15,
     paddingHorizontal: 20,
+    fontFamily: 'The_Jamsil_3',
   },
   button: {
     width: 300,

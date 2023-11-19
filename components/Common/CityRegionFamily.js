@@ -301,6 +301,7 @@ export const cityRegion = {
 };
 
 export const family = [
+  {label: '해당없음', value: null},
   {label: '저소득', value: 'LOW_INCOME'},
   {label: '장애인', value: 'DISABLED'},
   {label: '한부모,조손', value: 'SINGLE_PARENT'},

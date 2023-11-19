@@ -12,7 +12,7 @@ export const UserInfoSubmit = ({
   navigation,
 }) => {
   return (
-    <TouchableOpacity style={{marginTop: 10, marginBottom: 10}}>
+    <TouchableOpacity style={{marginTop: 20, marginBottom: 20}}>
       <Button
         title="회원가입"
         onPress={() => {

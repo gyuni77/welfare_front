@@ -21,7 +21,12 @@ export const SignupInput = ({
     setRegion(''); // 선택된 지방 초기화
   };
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center',
+      }}>
       <Text style={styles.login}>회원가입</Text>
       <View style={{flexDirection: 'row'}}>
         <TextInput
@@ -59,6 +64,9 @@ export const SignupInput = ({
             useNativeAndroidPickerStyle={false} // 기본 안드로이드 스타일 제거
             onValueChange={handleCityChange}
             items={Cityname}
+            placeholder={{
+              label: '시도명',
+            }}
           />
         </View>
         <View>
@@ -69,6 +77,9 @@ export const SignupInput = ({
             useNativeAndroidPickerStyle={false} // 기본 안드로이드 스타일 제거
             onValueChange={value => setRegion(value)}
             items={cityRegion[city]}
+            placeholder={{
+              label: '시군명',
+            }}
           />
         </View>
       </View>
@@ -80,6 +91,9 @@ export const SignupInput = ({
           useNativeAndroidPickerStyle={false} // 기본 안드로이드 스타일 제거
           onValueChange={value => setFamilySituation(value)}
           items={family}
+          placeholder={{
+            label: '가구상황',
+          }}
         />
       </View>
     </View>
