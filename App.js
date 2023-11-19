@@ -7,6 +7,8 @@ import EditUserPage from './pages/EditUserPage.js';
 import RecommendPage from './pages/RecommendPage';
 import BookmarkPage from './pages/BookmarkPage';
 import SignupPage from './pages/SignupPage.js';
+import { faBookmark, faHouse, faRightToBracket, faThumbsUp, faUser } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +25,7 @@ const App = () => {
           )}
           options={{
             headerShown: false,
+            tabBarIcon: () => <FontAwesomeIcon icon={faHouse} />,
           }}
         />
         <Tab.Screen
@@ -32,6 +35,7 @@ const App = () => {
           )}
           options={{
             headerShown: false,
+            tabBarIcon: () => <FontAwesomeIcon icon={faThumbsUp} />,
           }}
         />
         <Tab.Screen
@@ -41,6 +45,7 @@ const App = () => {
           )}
           options={{
             headerShown: false,
+            tabBarIcon: () => <FontAwesomeIcon icon={faBookmark} />,
           }}
         />
         {token ? (
@@ -51,6 +56,7 @@ const App = () => {
             )}
             options={{
               headerShown: false,
+              tabBarIcon: () => <FontAwesomeIcon icon={faUser} />,
             }}
           />
         ) : (
@@ -61,6 +67,7 @@ const App = () => {
             )}
             options={{
               headerShown: false,
+              tabBarIcon: () => <FontAwesomeIcon icon={faRightToBracket} />,
             }}
           />
         )}
