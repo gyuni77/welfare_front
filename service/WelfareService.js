@@ -14,6 +14,18 @@ class WelfareService {
       });
   };
 
+  getAllWelfareByPageNum = async pageNum => {
+    return await axios
+      .get(`${BACKEND_URL}/welfare/all/${pageNum}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(response => {
+        return response.data;
+      });
+  };
+
   getAllDataByUserInfo = async token => {
     try {
       return await axios

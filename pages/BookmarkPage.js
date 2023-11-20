@@ -4,8 +4,6 @@ import userService from '../service/UserService';
 import {Button, FlatList, SafeAreaView, View} from 'react-native';
 import {styles} from '../styles/MainPageStyle';
 import RenderItem from '../components/Common/RenderItem';
-import WelfareContents from '../components/Common/WelfareContents';
-import {Header} from '../components/Common/Header';
 
 const BookmarkPage = ({navigation, token}) => {
   const [welfareList, setWelfareList] = useState([]);
@@ -26,13 +24,19 @@ const BookmarkPage = ({navigation, token}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <WelfareContents
-        welfareList={welfareList}
-        bookmarkList={bookmarkList}
-        setWelfareList={setWelfareList}
-        setBookmarkList={setBookmarkList}
-        token={token}
-        navigation={navigation}
+      <FlatList
+        data={welfareList}
+        renderItem={({item}) => (
+          <RenderItem
+            welfare={item}
+            bookmarkList={bookmarkList}
+            setBookmarkList={setBookmarkList}
+            token={token}
+            navigation={navigation}
+          />
+        )}
+        numColumns={2}
+        columnWrapperStyle={{justifyContent: 'space-between'}}
       />
     </SafeAreaView>
   );

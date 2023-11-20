@@ -1,43 +1,80 @@
 import React, {useState} from 'react';
-import {View, SafeAreaView, Button, ActivityIndicator} from 'react-native';
-import WelfareContents from '../components/Common/WelfareContents';
+import {
+  View,
+  SafeAreaView,
+  Button,
+  ActivityIndicator,
+  FlatList,
+} from 'react-native';
 import {styles} from '../styles/MainPageStyle';
 import {SearchBar} from '../components/MainPageComponents/SearchBar';
 import mainPageService from '../service/WelfareService';
 import {useFocusEffect} from '@react-navigation/native';
 import userService from '../service/UserService';
-import {Header} from '../components/Common/Header';
+import RenderItem from '../components/Common/RenderItem';
+import welfareService from '../service/WelfareService';
 
 const MainPage = ({token, setToken, navigation}) => {
-  const [welfareList, setWelfareList] = useState([]);
-  const [bookmarkedWelfareList, setBookmarkedWelfareList] = useState([]);
+  const [welfares, setWelfares] = useState([]);
+  const [pageNum, setPageNum] = useState(0);
+  const [hasNextPage, setHasNextPage] = useState(true);
+
+  const [bookmarks, setBookmarks] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [loding, setLoding] = useState(true);
+
+  //main init
   useFocusEffect(
     React.useCallback(() => {
+      //paging
       setLoding(true);
-      if (!keyword) {
-        mainPageService.getAllDefaultData().then(data => {
-          setWelfareList(data);
-          setLoding(false);
+      mainPageService
+        .getAllWelfareByPageNum(pageNum)
+        .then(data => {
+          if (data.last) {
+            setHasNextPage(false);
+          }
+          setWelfares([...welfares, ...data.content]);
+        })
+        .then(() => {
+          console.log(welfares.length);
         });
-      } else {
-        mainPageService.getDataBySearch(keyword).then(data => {
-          setWelfareList(data);
-          setLoding(false);
-        });
-      }
+      setLoding(false);
+    }, [pageNum]),
+  );
 
-      //bookmark init
+  //keyword effect
+  useFocusEffect(
+    React.useCallback(() => {
+      if (keyword) {
+        setLoding(true);
+        mainPageService.getDataBySearch(keyword).then(data => {
+          setWelfares(data);
+        });
+        setLoding(false);
+      }
+    }, [keyword]),
+  );
+
+  //bookmark init
+  useFocusEffect(
+    React.useCallback(() => {
       if (token) {
         userService.getUserInfo(token).then(user => {
-          setBookmarkedWelfareList(user.bookmarks);
+          setBookmarks(user.bookmarks);
         });
       } else {
-        setBookmarkedWelfareList([]);
+        setBookmarks([]);
       }
-    }, [token, keyword]),
+    }, [token]),
   );
+
+  const onEndReached = () => {
+    if (hasNextPage) {
+      const nextPageNum = pageNum + 1;
+      setPageNum(nextPageNum);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,12 +84,21 @@ const MainPage = ({token, setToken, navigation}) => {
       {loding ? (
         <ActivityIndicator size="large" />
       ) : (
-        <WelfareContents
-          welfareList={welfareList}
-          bookmarkList={bookmarkedWelfareList}
-          setBookmarkList={setBookmarkedWelfareList}
-          token={token}
-          navigation={navigation}
+        <FlatList
+          data={welfares}
+          onEndReached={onEndReached}
+          onEndReachedThreshold={0.5}
+          renderItem={({item}) => (
+            <RenderItem
+              welfare={item}
+              bookmarkList={bookmarks}
+              setBookmarkList={setBookmarks}
+              token={token}
+              navigation={navigation}
+            />
+          )}
+          numColumns={2}
+          columnWrapperStyle={{justifyContent: 'space-between'}}
         />
       )}
     </SafeAreaView>
