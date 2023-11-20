@@ -18,6 +18,7 @@ export const FamilyEdit = ({
         textInputProps={{underlineColorAndroid: 'transparent'}}
         fixAndroidTouchableBug={true}
         useNativeAndroidPickerStyle={false}
+        value={user.familySituation}
         onValueChange={value => setNewFamilySituation(value)}
         placeholder={{
           label: '가구상황',

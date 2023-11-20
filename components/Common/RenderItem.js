@@ -61,9 +61,15 @@ const RenderItem = ({
           {welfare.servNm}
         </Text>
       </View>
-      <Text style={styles.TextContents} numberOfLines={3}>
-        {welfare.servDgst}
-      </Text>
+      <View>
+        <Text style={styles.TextContents} numberOfLines={3}>
+          {welfare.servDgst}
+        </Text>
+      </View>
+      <View style={{flexDirection: 'row'}}>
+        <Text style={{color: 'black'}}> {welfare.ctpvNm}</Text>
+        <Text style={{color: 'black'}}> {welfare.sggNm}</Text>
+      </View>
       <View
         style={{
           flexDirection: 'row',
