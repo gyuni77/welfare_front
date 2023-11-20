@@ -16,6 +16,7 @@ import welfareService from '../service/WelfareService';
 
 const MainPage = ({token, setToken, navigation}) => {
   const [welfares, setWelfares] = useState([]);
+  const [searchedWelfares, setSearchedWelfares] = useState([]);
   const [pageNum, setPageNum] = useState(0);
   const [hasNextPage, setHasNextPage] = useState(true);
 
@@ -28,17 +29,12 @@ const MainPage = ({token, setToken, navigation}) => {
     React.useCallback(() => {
       //paging
       setLoding(true);
-      mainPageService
-        .getAllWelfareByPageNum(pageNum)
-        .then(data => {
-          if (data.last) {
-            setHasNextPage(false);
-          }
-          setWelfares([...welfares, ...data.content]);
-        })
-        .then(() => {
-          console.log(welfares.length);
-        });
+      mainPageService.getAllWelfareByPageNum(pageNum).then(data => {
+        if (data.last) {
+          setHasNextPage(false);
+        }
+        setWelfares([...welfares, ...data.content]);
+      });
       setLoding(false);
     }, [pageNum]),
   );
@@ -49,7 +45,7 @@ const MainPage = ({token, setToken, navigation}) => {
       if (keyword) {
         setLoding(true);
         mainPageService.getDataBySearch(keyword).then(data => {
-          setWelfares(data);
+          setSearchedWelfares(data);
         });
         setLoding(false);
       }
@@ -85,7 +81,7 @@ const MainPage = ({token, setToken, navigation}) => {
         <ActivityIndicator size="large" />
       ) : (
         <FlatList
-          data={welfares}
+          data={keyword ? searchedWelfares : welfares}
           onEndReached={onEndReached}
           onEndReachedThreshold={0.5}
           renderItem={({item}) => (
