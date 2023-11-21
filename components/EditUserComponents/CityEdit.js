@@ -27,7 +27,7 @@ export const CityEdit = ({
             textInputProps={{underlineColorAndroid: 'transparent'}}
             fixAndroidTouchableBug={true} // 안드로이드 오류 해결
             useNativeAndroidPickerStyle={false} // 기본 안드로이드 스타일 제거
-            value={user.ctpvNm}
+            value={NewCity}
             onValueChange={handleCityChange}
             placeholder={{
               label: '시도명',

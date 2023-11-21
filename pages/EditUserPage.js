@@ -7,19 +7,26 @@ import {CityEdit} from '../components/EditUserComponents/CityEdit';
 import {Logout} from '../components/EditUserComponents/Logout';
 import userService from '../service/UserService';
 import {Header} from '../components/Common/Header';
+import {cityRegion} from '../components/Common/CityRegionFamily';
+import {useFocusEffect} from '@react-navigation/native';
 
 const EditUserPage = ({navigation, token, setToken}) => {
   const [user, setUser] = useState('');
   const [NewPassword, setNewPassword] = useState('');
   const [NewFamilySituation, setNewFamilySituation] = useState('');
   const [NewCity, setNewCity] = useState('서울특별시');
-  const [NewRegion, setNewRegion] = useState('');
+  const [NewRegion, setNewRegion] = useState([]);
 
-  useEffect(() => {
-    userService.getUserInfo(token).then(userInfo => {
-      setUser(userInfo);
-    });
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      userService.getUserInfo(token).then(userInfo => {
+        setUser(userInfo);
+        setNewFamilySituation(userInfo.familySituation);
+        setNewCity(userInfo.ctpvNm);
+        setNewRegion(cityRegion[userInfo.ctpvNm]);
+      });
+    }, []),
+  );
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
