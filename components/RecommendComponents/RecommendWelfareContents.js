@@ -12,6 +12,7 @@ const RecommendWelfareContents = ({
   return (
     <FlatList
       data={welfareList}
+      initialNumToRender={10}
       renderItem={({item}) => (
         <RecommendRenderItem
           welfare={item}

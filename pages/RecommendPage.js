@@ -9,16 +9,16 @@ import {ActivityIndicator, View} from 'react-native';
 const RecommendPage = ({navigation, token}) => {
   const [RecommendWelfareList, setRecommendWelfareList] = useState([]);
   const [bookmarkedWelfareList, setBookmarkedWelfareList] = useState([]);
-  const [recommendLoding, setRecommendLoding] = useState(true);
+  const [recommendLoding, setRecommendLoding] = useState(false);
   useFocusEffect(
     React.useCallback(() => {
-      setRecommendLoding(true);
+      // setRecommendLoding(true);
       if (!token) {
         navigation.navigate('Login');
       } else {
         mainPageService.getAllDataByUserInfo(token).then(data => {
           setRecommendWelfareList(data);
-          setRecommendLoding(false);
+          // setRecommendLoding(false);
         });
       }
     }, [navigation, token]),
