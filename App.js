@@ -1,30 +1,90 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Login from './Login.js';
-import Signin from './Signin.js';
-import LocalWelfare from './LocalWelfare.js';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import LoginPage from './pages/LoginPage.js';
+import MainPage from './pages/MainPage.js';
+import EditUserPage from './pages/EditUserPage.js';
+import RecommendPage from './pages/RecommendPage';
+import BookmarkPage from './pages/BookmarkPage';
+import SignupPage from './pages/SignupPage.js';
+import { faBookmark, faHouse, faRightToBracket, faThumbsUp, faUser } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
+  const [token, setToken] = useState(null);
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LocalWelfare">
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Signin" component={Signin} />
-        <Stack.Screen name="LocalWelfare" component={LocalWelfare} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          children={props => (
+            <MainPage {...props} token={token} setToken={setToken} />
+          )}
+          options={{
+            headerShown: false,
+            tabBarIcon: () => <FontAwesomeIcon icon={faHouse} />,
+          }}
+        />
+        <Tab.Screen
+          name="Recommend"
+          children={props => (
+            <RecommendPage {...props} token={token} setToken={setToken} />
+          )}
+          options={{
+            headerShown: false,
+            tabBarIcon: () => <FontAwesomeIcon icon={faThumbsUp} />,
+          }}
+        />
+        <Tab.Screen
+          name="Bookmark"
+          children={props => (
+            <BookmarkPage {...props} token={token} setToken={setToken} />
+          )}
+          options={{
+            headerShown: false,
+            tabBarIcon: () => <FontAwesomeIcon icon={faBookmark} />,
+          }}
+        />
+        {token ? (
+          <Tab.Screen
+            name="Profile"
+            children={props => (
+              <EditUserPage {...props} token={token} setToken={setToken} />
+            )}
+            options={{
+              headerShown: false,
+              tabBarIcon: () => <FontAwesomeIcon icon={faUser} />,
+            }}
+          />
+        ) : (
+          <Tab.Screen
+            name="Login"
+            children={props => (
+              <LoginPage {...props} token={token} setToken={setToken} />
+            )}
+            options={{
+              headerShown: false,
+              tabBarIcon: () => <FontAwesomeIcon icon={faRightToBracket} />,
+            }}
+          />
+        )}
+        <Tab.Screen
+          name="Signup"
+          children={props => (
+            <SignupPage {...props} token={token} setToken={setToken} />
+          )}
+          options={{
+            headerShown: false,
+            tabBarButton: () => null,
+            tabBarVisible: false,
+          }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  ViewStyle: {
-    backgroundColor: 'black',
-  },
-  LoginStyle: {},
-});
 
 export default App;
